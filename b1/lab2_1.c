@@ -12,7 +12,6 @@ struct Student {
   float gpa;
 };
 
-// 1. Tạo danh sách sinh viên và lưu vào file
 void createStudentList() {
   FILE *fp = fopen(FILENAME, "wb");
   if (fp == NULL) {
@@ -49,7 +48,6 @@ void createStudentList() {
   printf("Đã lưu danh sách sinh viên vào file!\n");
 }
 
-// 2. Tìm kiếm sinh viên
 void searchStudent() {
   FILE *fp = fopen(FILENAME, "rb");
   if (fp == NULL) {
@@ -83,7 +81,6 @@ void searchStudent() {
   fclose(fp);
 }
 
-// 3. Hiển thị danh sách sinh viên theo lớp
 void displayByClass() {
   FILE *fp = fopen(FILENAME, "rb");
   if (fp == NULL) {
@@ -116,7 +113,6 @@ void displayByClass() {
   fclose(fp);
 }
 
-// 4. Tách file theo lớp
 void splitByClass() {
   FILE *fp = fopen(FILENAME, "rb");
   if (fp == NULL) {
@@ -128,7 +124,6 @@ void splitByClass() {
   char classes[MAX_STUDENTS][20];
   int class_count = 0;
 
-  // Tìm danh sách các lớp độc nhất
   while (fread(&sv, sizeof(struct Student), 1, fp)) {
     int exists = 0;
     for (int i = 0; i < class_count; i++) {
@@ -143,7 +138,6 @@ void splitByClass() {
     }
   }
 
-  // Tạo file cho từng lớp
   rewind(fp);
   for (int i = 0; i < class_count; i++) {
     char filename[30];
@@ -164,7 +158,6 @@ void splitByClass() {
   fclose(fp);
 }
 
-// 5. Thêm sinh viên mới
 void addStudent() {
   FILE *fp = fopen(FILENAME, "ab");
   if (fp == NULL) {
@@ -194,7 +187,6 @@ void addStudent() {
   printf("Đã thêm sinh viên mới!\n");
 }
 
-// 6. Sửa thông tin sinh viên
 void editStudent() {
   FILE *fp = fopen(FILENAME, "rb+");
   if (fp == NULL) {
@@ -242,7 +234,6 @@ void editStudent() {
   fclose(fp);
 }
 
-// 7. Loại bỏ sinh viên
 void removeStudent() {
   FILE *fp = fopen(FILENAME, "rb");
   FILE *temp = fopen("temp.dat", "wb");
@@ -279,7 +270,6 @@ void removeStudent() {
   }
 }
 
-// 8. Sắp xếp danh sách sinh viên theo GPA
 void sortStudents() {
   FILE *fp = fopen(FILENAME, "rb+");
   if (fp == NULL) {
@@ -291,14 +281,12 @@ void sortStudents() {
   struct Student sv;
   int count = 0;
 
-  // Đọc tất cả sinh viên vào mảng
   while (fread(&sv, sizeof(struct Student), 1, fp)) {
     count++;
     students = realloc(students, count * sizeof(struct Student));
     students[count - 1] = sv;
   }
 
-  // Sắp xếp theo GPA (giảm dần)
   for (int i = 0; i < count - 1; i++) {
     for (int j = 0; j < count - i - 1; j++) {
       if (students[j].gpa < students[j + 1].gpa) {
@@ -309,7 +297,6 @@ void sortStudents() {
     }
   }
 
-  // Ghi lại vào file
   rewind(fp);
   for (int i = 0; i < count; i++) {
     fwrite(&students[i], sizeof(struct Student), 1, fp);

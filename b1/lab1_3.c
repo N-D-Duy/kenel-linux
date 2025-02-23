@@ -18,7 +18,7 @@ int main() {
   int b[n];
   printf("Mảng a: ");
   for (int i = 0; i < n; i++) {
-    printf("%d ", b[i]);
+    printf("%d ", a[i]);
   }
   createAdjacentSumArray(a, b, n);
 

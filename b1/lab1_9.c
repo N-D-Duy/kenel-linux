@@ -5,14 +5,12 @@ void sortMatrix(float matrix[][100], int rows, int cols) {
   float temp[size];
   int k = 0;
 
-  // Chuyển ma trận thành mảng 1D
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       temp[k++] = matrix[i][j];
     }
   }
 
-  // Sắp xếp mảng 1D
   for (int i = 0; i < size - 1; i++) {
     for (int j = i + 1; j < size; j++) {
       if (temp[i] > temp[j]) {
@@ -23,7 +21,6 @@ void sortMatrix(float matrix[][100], int rows, int cols) {
     }
   }
 
-  // Chuyển mảng 1D trở lại ma trận
   k = 0;
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
@@ -35,7 +32,7 @@ void sortMatrix(float matrix[][100], int rows, int cols) {
 void printMatrix(float matrix[][100], int rows, int cols) {
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      printf("%.2f ", matrix[i][j]);
+      printf("%.1f ", matrix[i][j]);
     }
     printf("\n");
   }
